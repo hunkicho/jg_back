@@ -19,6 +19,14 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v2
 
+      - name: create remote directory
+        uses: appleboy/ssh-action@master
+        with:
+          host: ${{ secrets.HOST }}
+          username: {{ secrets.SERVER_USER }}
+          key: ${{ secrets.PRIVATE_KEY }}
+          script: mkdir -p /home/{{ secrets.SERVER_USER }}/srv/{{ secrets.SERVER_USER }}
+
       - name: copy source via ssh key
         uses: burnett01/rsync-deployments@4.1
         with:
