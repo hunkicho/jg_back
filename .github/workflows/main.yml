@@ -70,6 +70,15 @@ jobs:
           port: ${{ secrets.PORT }}
           source: "./nginx"
           target: "/home/${{ secrets.SERVER_USER }}/"
+      - name: copy django Dockerfile
+        uses: appleboy/scp-action@master
+        with:
+          host: ${{ secrets.HOST }}
+          username: ${{ secrets.SERVER_USER }}
+          key: ${{ secrets.PRIVATE_KEY }}
+          port: ${{ secrets.PORT }}
+          source: "Dockerfile"
+          target: "/home/${{ secrets.SERVER_USER }}/"
       - name: executing remote ssh commands using password
         uses: appleboy/ssh-action@master
         with:
